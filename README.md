@@ -1,21 +1,13 @@
-# Hospital Management System
+Hospital Management System Project
 
-## Project Documentation
-
-### Project Title
+ Project Title
 Hospital Management System (HMS)
-
-### Prepared By
-[Your Name]
-
-### Department
-[Your Department / Program]
-
-### Academic Year
-[Year]
-
-### Date
-[Date]
+ Prepared By
+Rinki Kumari
+ Department
+BCA-AKU
+Academic Year
+2023-2026
 
 ---
 
