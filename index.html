@@ -1,0 +1,562 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hospital Management System</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom Color Scheme -->
+  <link href="styles.css" rel="stylesheet">
+
+  <!-- CSS -->
+  <style>
+    .navbar{
+      position:fixed;
+      width:100%;
+      background-color: #0d6efd !important;
+    }
+
+    .navbar .navbar-brand {
+      color: white !important;
+    }
+
+    .navbar .nav-link {
+      color: white !important;
+    }
+
+    .navbar .nav-link:hover {
+      color: #e9ecef !important;
+    }
+
+    .navbar .navbar-toggler {
+      border-color: white;
+    }
+
+    .navbar .navbar-toggler-icon {
+      filter: brightness(0) invert(1);
+    }
+
+    .hero{
+      background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+      url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-8zC9SiDEGcPPMszQXlhG3O2NnEbjLIOwqw&s');
+      background-size:cover;
+      background-position:center;
+      height:90vh;
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .hero h1{
+      font-size:55px;
+      font-weight:bold;
+    }
+
+    .welcome-text{
+      opacity:0;
+      transform:translateY(-10px);
+      transition:opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .welcome-text.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-text {
+      animation: slideInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .hero-text:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+
+    .hero-text:nth-child(2) {
+      animation-delay: 1s;
+    }
+
+    .hero-text:nth-child(3) {
+      animation-delay: 1.7s;
+    }
+
+    .hero-text:nth-child(4) {
+      animation-delay: 2.4s;
+    }
+
+    .more-about{
+      opacity:0;
+      transition:opacity 0.4s ease;
+    }
+
+    .more-about.show{
+      opacity:1;
+    }
+
+    @keyframes blink {
+      0%, 49% {
+        opacity: 1;
+      }
+      50%, 100% {
+        opacity: 0;
+      }
+    }
+
+    .navbar-brand img {
+      animation: blink 1s infinite;
+    }
+
+    /* About Us Animations */
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .about-image {
+      animation: slideInLeft 0.8s ease-out;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .about-image:hover {
+      transform: scale(1.05);
+    }
+
+    .about-content {
+      animation: slideInRight 0.8s ease-out;
+    }
+
+    .service-item {
+      opacity: 0;
+      animation: slideInRight 0.6s ease-out forwards;
+      padding: 12px 0;
+      border-left: 4px solid var(--primary-color);
+      padding-left: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .service-item:hover {
+      transform: translateX(10px);
+      border-left-color: var(--primary-dark);
+      font-weight: bold;
+    }
+
+    .service-item:nth-child(1) { animation-delay: 0.2s; }
+    .service-item:nth-child(2) { animation-delay: 0.4s; }
+    .service-item:nth-child(3) { animation-delay: 0.6s; }
+    .service-item:nth-child(4) { animation-delay: 0.8s; }
+    .service-item:nth-child(5) { animation-delay: 1s; }
+    .service-item:nth-child(6) { animation-delay: 1.2s; }
+
+    /* Contact Us Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .contact-section-title {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .contact-form-group {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .contact-form-group:nth-child(1) { animation-delay: 0.2s; }
+    .contact-form-group:nth-child(2) { animation-delay: 0.4s; }
+    .contact-form-group:nth-child(3) { animation-delay: 0.6s; }
+    .contact-form-group:nth-child(4) { animation-delay: 0.8s; }
+    .contact-form-group:nth-child(5) { animation-delay: 1s; }
+
+    .form-control {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .form-control:hover {
+      border-color: #0d6efd;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #0d6efd;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn {
+      animation: fadeInUp 0.6s ease-out;
+      animation-delay: 0.8s;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 12px 30px;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(13, 110, 253, 0.3);
+    }
+
+    .submit-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .contact-result {
+      animation: slideInUp 0.6s ease-out;
+      border-radius: 8px;
+    }
+
+    .footer {
+      background-color: #0d6efd;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 50px;
+      border-top: 3px solid #0d6efd;
+    }
+
+    .footer p {
+      color: white;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .footer a {
+      color: white;
+    }
+
+    .footer a:hover {
+      opacity: 0.8;
+    }
+
+    .footer svg {
+      fill: white;
+    }
+
+    .footer svg:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">CITY HOSPITAL<img src="https://media.istockphoto.com/id/1298213439/vector/medicine-logo.jpg?s=612x612&w=0&k=20&c=3GZJ_LMnLcEdsreNGa43f3hMFUbjdzjEmao5IGETQJ8=" height="30px"></a>
+
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#home">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+		
+		 <li class="nav-item">
+          <a class="nav-link" href="#login">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Home Section -->
+<section class="hero" id="home">
+<div>
+    <h1 id="welcomeText" class="welcome-text hero-text" style="color: white;">WELCOME</h1>
+    <h1 id="tagline" class="hero-text" style="color: white;">Your Partner in health and wellness</h1>
+    <p class="lead hero-text" style="color: white;">Medical Services that You can Trust 100%</p>
+    <p class="hero-text" style="color: white;">Meet with your best doctor  here</p>
+	
+	<a href="https://rinkichoudhary197@gmail.com"style="font-size:40px;text-decoration:none;">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="blue" class="mail-icon" viewBox="0 0 16 16">
+  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 
+    2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 
+    1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 
+    2.383-4.708 2.825L15 11.105V5.383zM14.803 
+    12H1.197l4.905-3.433L8 9.783l1.898-1.216L14.803 
+    12zM1 11.105l4.708-2.897L1 5.383v5.722z"/>
+</svg>
+</a>&nbsp&nbsp;
+
+<a href="https://facebook.com"style="font-size:40px;text-decoration:none;">
+<svg xmlns="http://www.w3.org/2000/svg" 
+     width="40" height="40" 
+     fill="blue" 
+     viewBox="0 0 24 24">
+  <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.19 2.23.19v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/>
+</svg>
+</a>&nbsp&nbsp;
+
+  </div>
+</section>
+
+<!-- About Us -->
+<section class="bg-light py-5" id="about">
+<h1 class="text-center mb-4">Our Healthcare Services</h1>
+  <div class="container" style="display:flex;align-items:center;gap:100px;">
+    
+	
+	<img src="https://img.freepik.com/premium-photo/smiling-millennial-indian-woman-doctor-family-therapist-white-coat-show-finger-empty-space_116547-39605.jpg" height="250px" class="about-image">
+
+	<div class="about-content">
+	<ul style="color:blue;font-size:20px;list-style:none;padding:0;margin:0;">
+    <li class="service-item">✓ Make an appointment</li>    
+	<li class="service-item">✓ Medical checkup</li>
+	<li class="service-item">✓ Help by specialist</li>     
+	<li class="service-item">✓ Nursing services</li>
+	<li class="service-item">✓ Get diagnostic report</li>    
+	<li class="service-item">✓ Pharmacy</li>
+	</ul>
+
+	<button id="readMoreBtn" class="btn btn-primary btn-sm mt-4">Read more</button>
+
+	<div id="moreAbout" class="more-about mt-3 d-none">
+		<p style="color:blue;font-size:16px;">We provide comprehensive care with experienced specialists, modern diagnostic facilities, and personalized treatment plans. Our team ensures compassionate support at every step of your health journey.</p>
+		<p style="color:blue;font-size:16px;">Our services include preventive care, chronic disease management, emergency support, and a fully-stocked pharmacy to make sure patients receive timely medicines and follow-ups.</p>
+	</div>
+	</div>
+	</div>
+	
+	
+  
+</section>
+
+<!-- Login page -->
+<section class="container py-5" id="login">
+<div style="display:flex;align-items:flex-start;gap:10px;justify-content:center;">
+<div class="card p-4 mx-auto" style="width:250px;height:400px;"> 
+  <h2 class="text-center mb-5">Our Modules</h2>
+  
+          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#adminLoginModal">Admin Login</button>&nbsp&nbsp;
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#doctorLoginModal">Doctor Login</button>&nbsp&nbsp;
+		  <a href="patient_login.php" class="btn btn-success">Patient Login</a>&nbsp&nbsp;
+         
+</div>
+<div>
+<img src="https://cdn.dribbble.com/userupload/24301287/file/original-3daee12f3fc9e3824d1d06ea7502a835.gif" height="400px">		  
+</div></div></section>
+
+<!-- Admin Login Modal -->
+<div class="modal fade" id="adminLoginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">👤 Admin Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form method="POST" action="admin_login.php">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" name="login" class="btn btn-danger">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Doctor Login Modal -->
+<div class="modal fade" id="doctorLoginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">👨‍⚕️ Doctor Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form method="POST" action="doctor_login.php">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" name="login" class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Us -->
+<section class="container py-5" id="contact">
+  <h2 class="text-center mb-5 contact-section-title">Drop us a message<img src="https://media.istockphoto.com/id/1298213439/vector/medicine-logo.jpg?s=612x612&w=0&k=20&c=3GZJ_LMnLcEdsreNGa43f3hMFUbjdzjEmao5IGETQJ8=" height="40px" style="margin-left:10px;"></h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+<form id="contactForm">
+
+        <div class="mb-3 contact-form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+        </div>
+
+        <div class="mb-3 contact-form-group">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+
+        <div class="mb-3 contact-form-group">
+          <label class="form-label">Message</label>
+          <textarea name="message" class="form-control" rows="4" placeholder="Write message" required></textarea>
+        </div>
+
+        <div class="contact-form-group">
+          <button type="submit" class="btn btn-primary w-100 submit-btn">
+            Send Message
+          </button>
+		  <img src="data:image/jpeg;base64,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" height="100px">
+        </div>
+
+      </form>
+	  
+
+      <div id="contactResult" class="alert alert-success mt-3 d-none contact-result" role="alert">
+        ✓ Your message has been sent successfully!
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+  <p>© CITY HOSPITAL | All Rights Reserved</p>
+  <a href="https://rinkichoudhary197@gmail.com"style="font-size:40px;text-decoration:none;">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="mail-icon" viewBox="0 0 16 16">
+  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 
+    2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 
+    1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 
+    2.383-4.708 2.825L15 11.105V5.383zM14.803 
+    12H1.197l4.905-3.433L8 9.783l1.898-1.216L14.803 
+    12zM1 11.105l4.708-2.897L1 5.383v5.722z"/>
+</svg>
+</a>&nbsp&nbsp;
+<a href="https://facebook.com"style="font-size:40px;text-decoration:none;">
+<svg xmlns="http://www.w3.org/2000/svg" 
+     width="40" height="40" 
+     fill="white" 
+     viewBox="0 0 24 24">
+  <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.19 2.23.19v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/>
+</svg>
+</a>&nbsp&nbsp;
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Text animation triggers on page load
+  document.addEventListener('DOMContentLoaded', function(){
+    // The hero text animations are now handled by CSS with staggered delays
+    var form = document.getElementById('contactForm');
+    var result = document.getElementById('contactResult');
+
+    if (form) {
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        result.classList.remove('d-none');
+        form.reset();
+      });
+    }
+  });
+</script>
+
+<script>
+  // Read more toggle for About section
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('readMoreBtn');
+    var more = document.getElementById('moreAbout');
+    if(btn && more){
+      btn.addEventListener('click', function(){
+        if(more.classList.contains('d-none')){
+          more.classList.remove('d-none');
+          setTimeout(function(){ more.classList.add('show'); }, 10);
+          btn.textContent = 'Read less';
+        } else {
+          more.classList.remove('show');
+          setTimeout(function(){ more.classList.add('d-none'); }, 300);
+          btn.textContent = 'Read more';
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
